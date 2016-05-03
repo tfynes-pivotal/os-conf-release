@@ -1,6 +1,6 @@
 ---
 blobstore:
-  provider: s3
+  provider: local
   options:
-    bucket_name: os-conf
+    blobstore_path: "./blobs"
 final_name: os-conf
