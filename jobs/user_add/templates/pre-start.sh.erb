@@ -1,6 +1,21 @@
 #!/bin/bash
 
-set -ex
+set -x
+
+sed '/ramdisk\t\/tmp/d' /etc/fstab > /etc/fstab.new
+mv /etc/fstab /etc/fstab.old
+mv /etc/fstab.new /etc/fstab
+echo -n "ramdisk" >> /etc/fstab
+echo -n -e "\t" >> /etc/fstab
+echo -n "/tmp" >> /etc/fstab
+echo -n -e "\t" >> /etc/fstab
+echo -n "tmpfs" >> /etc/fstab
+echo -n -e "\t" >> /etc/fstab
+echo "mode=1777,size=256M" >> /etc/fstab
+umount /tmp
+sleep 1
+mount /tmp
+
 
 <% p('users').each do |user_hash| %>
   <%  user = user_hash['name']
